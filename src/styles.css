@@ -142,3 +142,21 @@
     color: var(--color-foreground);
   }
 }
+
+:root {
+  --brand: oklch(0.42 0.2 265);
+  --brand-foreground: oklch(1 0 0);
+  --brand-soft: oklch(0.75 0.1 200);
+  --section: linear-gradient(135deg, oklch(0.72 0.09 230), oklch(0.62 0.15 268));
+  --heading: oklch(0.6 0.12 262);
+  --footer: oklch(0.2 0.03 260);
+}
+@theme inline {
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-soft: var(--brand-soft);
+  --color-heading: var(--heading);
+  --color-footer: var(--footer);
+  --font-sans: "Roboto", system-ui, sans-serif;
+}
+@utility bg-section { background-image: var(--section); }
