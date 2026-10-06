@@ -120,7 +120,7 @@ function Index() {
         {slides.map((s, k) => (
           <img key={k} src={s.img} alt={s.caption} className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${k === i ? "opacity-100" : "opacity-0"}`} />
         ))}
-        <h2 className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center text-2xl font-bold text-brand-foreground drop-shadow-lg md:text-4xl">{slides[i].caption}</h2>
+        <h2 className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center text-2xl font-bold text-brand-foreground drop-shadow-lg md:text-4xl">{slides[i]?.caption}</h2>
         <button aria-label="Previous" onClick={() => setI((i - 1 + slides.length) % slides.length)} className="absolute left-3 top-1/2 text-brand-foreground"><ChevronLeft size={32} /></button>
         <button aria-label="Next" onClick={() => setI((i + 1) % slides.length)} className="absolute right-3 top-1/2 text-brand-foreground"><ChevronRight size={32} /></button>
       </section>
