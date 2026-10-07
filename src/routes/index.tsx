@@ -1,14 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin, Youtube, ChevronLeft, ChevronRight } from "lucide-react";
-import classImg from "@/assets/class.jpg";
-import giftsImg from "@/assets/gifts.jpg";
-import foodImg from "@/assets/food.jpg";
 import medicalImg from "@/assets/medical.jpg";
 import blanketPhoto from "@/assets/Blanket.jpg.asset.json";
 import classPhoto from "@/assets/Class.jpg.asset.json";
 import lunchPhoto from "@/assets/Lunch.jpg.asset.json";
 import weightPhoto from "@/assets/Weight.jpg.asset.json";
+import giftsActivity from "@/assets/Gift-Box-2.jpg.asset.json";
+import classActivity from "@/assets/Class.jpeg.asset.json";
+import weightActivity from "@/assets/Weight.jpeg.asset.json";
+import lunchActivity from "@/assets/Lunch-2.jpg.asset.json";
+import blanketActivity from "@/assets/Blanket-2.jpg.asset.json";
+import campOne from "@/assets/Medical-Camp1-1024x640.jpg.asset.json";
+import campTwo from "@/assets/Medical-Camp2-1024x515.jpg.asset.json";
+import campThree from "@/assets/Medical-Camp3-1024x515.jpg.asset.json";
+import campFour from "@/assets/Medical-Camp4-1024x515.jpg.asset.json";
+import logoPhoto from "@/assets/mercy-logo.webp.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,7 +41,7 @@ const slides = [
 const activities = [
   {
     title: "Gospel Church of God Distributes Gifts of Love to Childrens",
-    imgs: [giftsImg, giftsImg],
+    imgs: [giftsActivity.url],
     sub: "Gospel Church of God Distributes Gifts of Love to Children in Megchami Sardar Para, Madhukhali, Faridpur",
     paras: [
       "In a heartwarming gesture of compassion, the Gospel Church of God organized an event to distribute gifts of love to the children of Megchami Sardar Para, a village in Madhukhali, Faridpur. The event, held under the auspices of Operation Generation, brought smiles to the faces of the children as they received various presents.",
@@ -44,7 +51,7 @@ const activities = [
   },
   {
     title: "Class teacher conducting class with the students.",
-    imgs: [classImg],
+    imgs: [classActivity.url],
     paras: [
       "We are dedicated to working towards empowering students to enhance their lives through the art of reading. By introducing them to well-written texts, we aim to expand their horizons and open up new worlds of knowledge and imagination.",
       "Our efforts are aimed at cultivating a love for reading in our students, which will not only help them in their academic pursuits but also enrich their personal lives. Through this initiative, we hope to equip our students with the necessary tools to become well-rounded individuals and make a positive impact in the world.",
@@ -52,7 +59,7 @@ const activities = [
   },
   {
     title: "Measuring the weight of school students",
-    imgs: [classImg],
+    imgs: [weightActivity.url],
     paras: [
       "Every month, school students are weighed to track their growth and development. It is promising to note that 98% of the students have gained weight and height according to their height.",
       "This indicates that the students are growing and developing in a healthy manner, which is crucial for their overall well-being. Proper nutrition and physical activity are key factors in promoting healthy growth and development, and it is important for schools to continue to prioritize these aspects of student health.",
@@ -61,7 +68,7 @@ const activities = [
   },
   {
     title: "Nutritious food is served to the students during lunchtime.",
-    imgs: [foodImg],
+    imgs: [lunchActivity.url],
     paras: [
       "We understand that some of our students come from economically disadvantaged backgrounds and may not have access to nutritious food at home. Therefore, we make sure to serve them healthy and nourishing meals during lunchtime at school. Our aim is to ensure that every student has access to a balanced and wholesome diet, which is crucial for their physical and mental development.",
       "By providing nutritious food, we hope to relieve the burden of hunger from our students' lives and empower them to focus on their studies and other pursuits. We believe that every child deserves a fair chance at success, and providing healthy meals is a step towards achieving that goal.",
@@ -69,7 +76,7 @@ const activities = [
   },
   {
     title: "Winter blankets are being distributed among the poor.",
-    imgs: [giftsImg],
+    imgs: [blanketActivity.url],
     paras: [
       "Mercy International, a non-profit organization, is actively involved in providing assistance to the needy people in the Megchami community by distributing winter blankets.",
       "The organization has also extended financial support to the Rehoboth community. The distribution of blankets has brought smiles to the faces of around 500 families, who have been suffering from cold weather.",
@@ -85,6 +92,15 @@ const activities = [
     ],
   },
 ];
+
+function PhotoFrame({ src, alt }: { src: string; alt: string }) {
+  return (
+    <div className="relative aspect-[16/10] overflow-hidden rounded-md border-2 border-brand-foreground bg-card shadow-sm">
+      <img src={src} alt="" aria-hidden="true" loading="lazy" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-xl" />
+      <img src={src} alt={alt} loading="lazy" className="relative h-full w-full object-contain" />
+    </div>
+  );
+}
 
 function Index() {
   const [i, setI] = useState(0);
@@ -108,7 +124,8 @@ function Index() {
       <header className="sticky top-0 z-20 bg-card shadow">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-2">
           <div className="flex items-center gap-2 text-lg font-bold text-brand">
-            <span className="text-2xl">🤝</span> Mercy International
+            <img src={logoPhoto.url} alt="Mercy International logo" className="h-12 w-16 shrink-0 rounded-sm border border-border object-contain" />
+            <span>Mercy International</span>
           </div>
           <nav className="hidden gap-2 text-xs font-medium md:flex">
             {["HOME", "OUR ACTIVITIES", "CONTACT US", "ABOUT US"].map((n, k) => (
@@ -155,10 +172,10 @@ function Index() {
         {activities.map((a) => (
           <section key={a.title}>
             <h2 className="bg-heading py-3 text-center text-xl font-semibold text-brand-foreground md:text-2xl">{a.title}</h2>
-            <div className="mx-auto grid max-w-4xl gap-6 px-4 py-8 md:grid-cols-2">
+            <div className="mx-auto grid max-w-6xl items-start gap-6 px-4 py-8 md:grid-cols-2 md:gap-8">
               <div className="space-y-4">
                 {a.imgs.map((src, k) => (
-                  <img key={k} src={src} alt={a.title} loading="lazy" className="w-full border-2 border-brand-foreground object-cover" />
+                  <PhotoFrame key={k} src={src} alt={a.title} />
                 ))}
               </div>
               <div className="space-y-4 text-sm leading-relaxed">
@@ -172,21 +189,17 @@ function Index() {
         {/* Medical camp */}
         <section>
           <h2 className="bg-heading py-3 text-center text-xl font-semibold text-brand-foreground md:text-2xl">Medical camp 2023 was held at Megchami, Madhukhali, Faridpur.</h2>
-          <div className="grid gap-6 px-4 py-8 md:grid-cols-2">
+          <div className="mx-auto grid max-w-6xl items-start gap-6 px-4 py-8 md:grid-cols-2 md:gap-8">
             <div className="space-y-4 text-sm leading-relaxed">
               <p>In the village of Megchami Sardar Para, Madhukhali, Faridpur district, free healthcare services and medicines were provided to everyone on behalf of Rehoboth Community USA.</p>
               <p>This two-day event saw the participation of 6 doctors and 12 nurses from Bangladesh, along with 9 assistants from the USA and 25 facilitators from Bangladesh.</p>
               <p>Over these two days, <b>healthcare services were provided to 1,356 people</b>. All expenses for this initiative were covered by the Rehoboth Community People USA.</p>
             </div>
-            <div className="relative">
-              <img src={medicalImg} alt="Medical Camp 2023" loading="lazy" className="w-full object-cover" />
-              <span className="absolute left-8 top-8 text-3xl font-bold text-brand drop-shadow md:text-5xl">Medical Camp 2023</span>
+            <div className="grid grid-cols-2 gap-4">
+              {[campTwo, campThree, campFour, campOne].map((photo, k) => (
+                <PhotoFrame key={photo.asset_id} src={photo.url} alt={`Medical Camp 2023 — photo ${k + 1}`} />
+              ))}
             </div>
-          </div>
-          <div className="grid gap-2 px-1 pb-8 md:grid-cols-3">
-            {[medicalImg, giftsImg, foodImg].map((s, k) => (
-              <img key={k} src={s} alt="Medical camp" loading="lazy" className="h-56 w-full object-cover" />
-            ))}
           </div>
         </section>
 
@@ -199,7 +212,10 @@ function Index() {
       <footer className="bg-footer text-brand-foreground">
         <div className="mx-auto grid max-w-5xl gap-10 px-4 py-14 md:grid-cols-3">
           <div>
-            <div className="mb-4 w-fit bg-card px-3 py-2 text-lg font-bold text-brand">🤝 Mercy International</div>
+            <div className="mb-4 flex w-fit items-center gap-2 bg-card px-3 py-2 text-lg font-bold text-brand">
+              <img src={logoPhoto.url} alt="Mercy International logo" loading="lazy" className="h-12 w-16 shrink-0 rounded-sm border border-border object-contain" />
+              <span>Mercy International</span>
+            </div>
             <p className="text-xs leading-relaxed opacity-80">Our mission is to build a strong community through children and women and walk with the communities in overcoming all short of poverty and unleashing their GOD-given potential to enjoy the fullness of life.</p>
           </div>
           <div>
