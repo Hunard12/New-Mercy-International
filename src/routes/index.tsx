@@ -5,6 +5,10 @@ import classImg from "@/assets/class.jpg";
 import giftsImg from "@/assets/gifts.jpg";
 import foodImg from "@/assets/food.jpg";
 import medicalImg from "@/assets/medical.jpg";
+import blanketPhoto from "@/assets/Blanket.jpg.asset.json";
+import classPhoto from "@/assets/Class.jpg.asset.json";
+import lunchPhoto from "@/assets/Lunch.jpg.asset.json";
+import weightPhoto from "@/assets/Weight.jpg.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,10 +25,10 @@ export const Route = createFileRoute("/")({
 });
 
 const slides = [
-  { img: classImg, caption: "Class teacher conducting the class" },
-  { img: giftsImg, caption: "Distributing gifts of love to children" },
-  { img: foodImg, caption: "Nutritious lunch for students" },
-  { img: medicalImg, caption: "Medical Camp 2023" },
+  { img: blanketPhoto.url, caption: "Winter blankets are being distributed among the poor" },
+  { img: classPhoto.url, caption: "Class teacher conducting the class with the students" },
+  { img: lunchPhoto.url, caption: "Nutritious food is served to the students during lunchtime" },
+  { img: weightPhoto.url, caption: "Measuring the weight of school students" },
 ];
 
 const activities = [
@@ -116,13 +120,16 @@ function Index() {
       </header>
 
       {/* Slider */}
-      <section className="relative h-[260px] overflow-hidden border-4 border-brand-soft md:h-[480px]">
+      <section className="relative aspect-video max-h-[520px] w-full overflow-hidden border-4 border-brand-soft bg-footer">
         {slides.map((s, k) => (
-          <img key={k} src={s.img} alt={s.caption} className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${k === i ? "opacity-100" : "opacity-0"}`} />
+          <div key={k} className={`absolute inset-0 transition-opacity duration-1000 ${k === i ? "opacity-100" : "opacity-0"}`}>
+            <img src={s.img} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-2xl" />
+            <img src={s.img} alt={s.caption} loading={k === 0 ? "eager" : "lazy"} className="absolute inset-0 h-full w-full object-contain" />
+          </div>
         ))}
-        <h2 className="absolute inset-x-0 top-1/2 -translate-y-1/2 text-center text-2xl font-bold text-brand-foreground drop-shadow-lg md:text-4xl">{slides[i]?.caption}</h2>
-        <button aria-label="Previous" onClick={() => setI((i - 1 + slides.length) % slides.length)} className="absolute left-3 top-1/2 text-brand-foreground"><ChevronLeft size={32} /></button>
-        <button aria-label="Next" onClick={() => setI((i + 1) % slides.length)} className="absolute right-3 top-1/2 text-brand-foreground"><ChevronRight size={32} /></button>
+        <p className="absolute inset-x-0 bottom-0 bg-footer/85 px-14 py-2 text-center text-sm font-semibold text-brand-foreground md:text-lg">{slides[i]?.caption}</p>
+        <button aria-label="Previous" onClick={() => setI((i - 1 + slides.length) % slides.length)} className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-footer/60 p-1 text-brand-foreground"><ChevronLeft size={32} /></button>
+        <button aria-label="Next" onClick={() => setI((i + 1) % slides.length)} className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-footer/60 p-1 text-brand-foreground"><ChevronRight size={32} /></button>
       </section>
 
       {/* Mission / Vision */}
