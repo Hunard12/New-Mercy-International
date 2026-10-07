@@ -121,11 +121,11 @@ function Index() {
 
       {/* Slider */}
       <div className="border-4 border-brand-soft bg-footer">
-        <section className="relative aspect-video max-h-[520px] w-full overflow-hidden">
+        <section className="relative grid overflow-hidden">
         {slides.map((s, k) => (
-          <div key={k} className={`absolute inset-0 transition-opacity duration-1000 ${k === i ? "opacity-100" : "opacity-0"}`}>
+          <div key={k} className={`pointer-events-none relative col-start-1 row-start-1 transition-opacity duration-1000 ${k === i ? "opacity-100" : "opacity-0"}`}>
             <img src={s.img} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-2xl" />
-            <img src={s.img} alt={s.caption} loading={k === 0 ? "eager" : "lazy"} className="absolute inset-0 h-full w-full object-contain" />
+            <img src={s.img} alt={s.caption} loading={k === 0 ? "eager" : "lazy"} className="block h-auto w-full" />
           </div>
         ))}
           <p className="absolute inset-x-0 bottom-0 hidden bg-footer/85 px-14 py-2 text-center text-sm font-semibold text-brand-foreground md:block md:text-lg">{slides[i]?.caption}</p>
