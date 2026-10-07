@@ -120,17 +120,20 @@ function Index() {
       </header>
 
       {/* Slider */}
-      <section className="relative aspect-video max-h-[520px] w-full overflow-hidden border-4 border-brand-soft bg-footer">
+      <div className="border-4 border-brand-soft bg-footer">
+        <section className="relative aspect-video max-h-[520px] w-full overflow-hidden">
         {slides.map((s, k) => (
           <div key={k} className={`absolute inset-0 transition-opacity duration-1000 ${k === i ? "opacity-100" : "opacity-0"}`}>
             <img src={s.img} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full scale-110 object-cover opacity-40 blur-2xl" />
             <img src={s.img} alt={s.caption} loading={k === 0 ? "eager" : "lazy"} className="absolute inset-0 h-full w-full object-contain" />
           </div>
         ))}
-        <p className="absolute inset-x-0 bottom-0 bg-footer/85 px-14 py-2 text-center text-sm font-semibold text-brand-foreground md:text-lg">{slides[i]?.caption}</p>
-        <button aria-label="Previous" onClick={() => setI((i - 1 + slides.length) % slides.length)} className="absolute left-3 top-1/2 -translate-y-1/2 rounded-full bg-footer/60 p-1 text-brand-foreground"><ChevronLeft size={32} /></button>
-        <button aria-label="Next" onClick={() => setI((i + 1) % slides.length)} className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-footer/60 p-1 text-brand-foreground"><ChevronRight size={32} /></button>
-      </section>
+          <p className="absolute inset-x-0 bottom-0 hidden bg-footer/85 px-14 py-2 text-center text-sm font-semibold text-brand-foreground md:block md:text-lg">{slides[i]?.caption}</p>
+          <button aria-label="Previous" onClick={() => setI((i - 1 + slides.length) % slides.length)} className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-footer/60 p-1 text-brand-foreground md:left-3"><ChevronLeft className="size-5 md:size-8" /></button>
+          <button aria-label="Next" onClick={() => setI((i + 1) % slides.length)} className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-footer/60 p-1 text-brand-foreground md:right-3"><ChevronRight className="size-5 md:size-8" /></button>
+        </section>
+        <p className="px-4 py-2 text-center text-xs font-semibold text-brand-foreground md:hidden">{slides[i]?.caption}</p>
+      </div>
 
       {/* Mission / Vision */}
       <section className="bg-brand py-12 text-brand-foreground">
