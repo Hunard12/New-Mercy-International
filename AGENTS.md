@@ -12,4 +12,5 @@
 <!-- LOVABLE:BEGIN-PROJECT-RULES -->
 - User-uploaded photos enter the app as `src/assets/<name>.<ext>.asset.json` Lovable Asset pointers, not copied binaries, so the repository stays free of large media files.
 - Photo frames use `object-contain` plus a blurred same-photo backdrop rather than a fixed-height `object-cover` crop, because the user requires every photo to be shown whole.
+- Activity and medical-gallery photos share a PhotoFrame renderer with a stable aspect ratio so borders, sizing, and full-photo visibility stay consistent.
 <!-- LOVABLE:END-PROJECT-RULES -->
