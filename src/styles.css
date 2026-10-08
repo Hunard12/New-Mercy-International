@@ -160,3 +160,13 @@
   --font-sans: "Roboto", system-ui, sans-serif;
 }
 @utility bg-section { background-image: var(--section); }
+:root {
+  --activities-bg: oklch(0.76 0.1 205);
+  --activity-card: linear-gradient(120deg, oklch(0.62 0.17 245), oklch(0.78 0.11 140) 40%, oklch(0.68 0.05 300) 65%, oklch(0.58 0.22 300));
+  --link: oklch(0.45 0.15 250);
+}
+@theme inline {
+  --color-activities: var(--activities-bg);
+  --color-link: var(--link);
+}
+@utility bg-activity-card { background-image: var(--activity-card); }
