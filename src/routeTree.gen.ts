@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActivitiesIndexRouteImport } from './routes/activities.index'
+import { Route as ActivitiesSlugRouteImport } from './routes/activities.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ActivitiesIndexRoute = ActivitiesIndexRouteImport.update({
+  id: '/activities/',
+  path: '/activities/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivitiesSlugRoute = ActivitiesSlugRouteImport.update({
+  id: '/activities/$slug',
+  path: '/activities/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activities/$slug': typeof ActivitiesSlugRoute
+  '/activities/': typeof ActivitiesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activities/$slug': typeof ActivitiesSlugRoute
+  '/activities': typeof ActivitiesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activities/$slug': typeof ActivitiesSlugRoute
+  '/activities/': typeof ActivitiesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/activities/$slug' | '/activities/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/activities/$slug' | '/activities'
+  id: '__root__' | '/' | '/activities/$slug' | '/activities/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivitiesSlugRoute: typeof ActivitiesSlugRoute
+  ActivitiesIndexRoute: typeof ActivitiesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/activities/': {
+      id: '/activities/'
+      path: '/activities'
+      fullPath: '/activities/'
+      preLoaderRoute: typeof ActivitiesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activities/$slug': {
+      id: '/activities/$slug'
+      path: '/activities/$slug'
+      fullPath: '/activities/$slug'
+      preLoaderRoute: typeof ActivitiesSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivitiesSlugRoute: ActivitiesSlugRoute,
+  ActivitiesIndexRoute: ActivitiesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
