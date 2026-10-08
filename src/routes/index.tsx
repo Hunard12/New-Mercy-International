@@ -129,7 +129,7 @@ function Index() {
           </div>
           <nav className="hidden gap-2 text-xs font-medium md:flex">
             {["HOME", "OUR ACTIVITIES", "CONTACT US", "ABOUT US"].map((n, k) => (
-              <a key={n} href="#" className={`px-3 py-1.5 ${k === 0 ? "border border-brand text-brand" : "text-muted-foreground hover:text-brand"}`}>{n}</a>
+              <a key={n} href={n === "OUR ACTIVITIES" ? "/activities" : "#"} className={`px-3 py-1.5 ${k === 0 ? "border border-brand text-brand" : "text-muted-foreground hover:text-brand"}`}>{n}</a>
             ))}
           </nav>
           <a href="#" className="rounded-full bg-brand px-8 py-2 text-xs font-semibold text-brand-foreground md:px-24">DONATE NOW</a>
